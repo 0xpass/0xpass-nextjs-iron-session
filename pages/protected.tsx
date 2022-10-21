@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { ConnectButton } from '@0xpass/react';
 
-const Home: NextPage = () => {
+const Protected: NextPage = () => {
   return (
     <div
       style={{
@@ -11,9 +11,10 @@ const Home: NextPage = () => {
         height: '100vh',
       }}
     >
+      Protected
       <ConnectButton />
     </div>
   );
 };
 
-export default Home;
+export default Protected;
