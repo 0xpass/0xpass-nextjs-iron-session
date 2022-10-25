@@ -57,9 +57,6 @@ const Home: NextPage = () => {
             {user?.userId}
           </div>
         </div>
-        {/* <button onClick={}>
-          logout
-        </button> */}
       </div>
       
     </div>
