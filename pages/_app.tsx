@@ -1,8 +1,10 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-
+import { SWRConfig } from 'swr'
 import { WagmiConfig, createClient, chain } from 'wagmi';
 import { PassProvider, getDefaultClient } from '@0xpass/react';
+import fetcher from 'lib/fetcher'
+
 
 const client = createClient(
   getDefaultClient({
@@ -13,11 +15,22 @@ const client = createClient(
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig client={client}>
-      <PassProvider apiKey="pass_SMNNLXFijYJpRJkv">
-        <Component {...pageProps} />
-      </PassProvider>
-    </WagmiConfig>
+    <SWRConfig
+      value={{
+        fetcher: fetcher,
+        onError: (err) => {
+          console.error(err)
+        },
+      }}
+    >
+      <WagmiConfig client={client}>
+        <PassProvider settings={{
+          envId: '29c37431-ae65-4c32-b8b7-3bbb60992d71'
+        }}>
+          <Component {...pageProps} />
+        </PassProvider>
+      </WagmiConfig>
+    </SWRConfig>
   );
 }
 
